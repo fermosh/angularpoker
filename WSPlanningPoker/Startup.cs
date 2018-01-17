@@ -35,6 +35,7 @@ namespace WSPlanningPoker
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.UseWebSockets();
 
             app.UseStaticFiles();
 
