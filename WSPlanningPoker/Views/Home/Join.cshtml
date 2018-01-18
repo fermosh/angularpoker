@@ -1,3 +1,13 @@
 ﻿@page
 @{}
+<script src="/js/pokerService.js" type="text/javascript" language="javascript"></script>
 <script src="/js/pokerController.js" type="text/javascript" language="javascript"></script>
+<div ng-controller="PokerController as poker">
+    <section id="members">
+        <h1>Team:</h1>
+        <ul>
+            <li ng-repeat="member in poker.members">{{member.name}}</li>
+        </ul>
+    </section>
+    {{poker | json}}
+</div>
