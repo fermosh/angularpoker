@@ -16,5 +16,9 @@
 
   <ItemGroup>
     <Folder Include="WS\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Views\Home\Join.cshtml.cs" />
   </ItemGroup>
 </Project>

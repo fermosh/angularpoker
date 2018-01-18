@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WSPlanningPoker.Services;
 
 namespace WSPlanningPoker
 {
@@ -26,6 +27,7 @@ namespace WSPlanningPoker
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddSingleton<IWSPPData , WSPPData>( );
             services.AddWebSocketManager();
         }
 
