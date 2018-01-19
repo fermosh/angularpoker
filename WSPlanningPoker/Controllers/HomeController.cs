@@ -12,17 +12,21 @@ namespace WSPlanningPoker.Controllers
     public class HomeController : Controller
     {
         private IWSPPData _data;
-        public HomeController(IWSPPData data){
+        private NotificationsMessageHandler _notificationsMessageHandler { get; set; }
+
+        public HomeController(IWSPPData data,NotificationsMessageHandler notificationsMessageHandler){
             _data = data;
+            _notificationsMessageHandler = notificationsMessageHandler;
         }
         public IActionResult Index()
         {
             return View();
         }
-        public IActionResult Vote(string name,int vote)
+        public async Task<IActionResult> Vote(string name,int vote)
         {
+            if (string.IsNullOrWhiteSpace(name)) return BadRequest();
             _data.Members.Where(m=>m.Name.Equals(name)).First().Vote=vote;
-
+            await _notificationsMessageHandler.SendMessageToAllAsync("{'name':'"+name+"','vote':" +vote.ToString()+ "}");
             return Ok();
         }
 
@@ -32,6 +36,8 @@ namespace WSPlanningPoker.Controllers
 
         public IActionResult Join(string name)
         {
+            if (string.IsNullOrWhiteSpace(name)) return BadRequest("Empty Name");
+
             if (!_data.Members.Any(m => m.Name.Equals(name)))
                 _data.Members = _data.Members.Append(new Member { Name = name });
             ViewData["MySelf"] = name;
