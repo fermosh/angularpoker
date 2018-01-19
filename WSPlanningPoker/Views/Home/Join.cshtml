@@ -8,6 +8,7 @@
         <h1>Team:</h1>
         <ul>
             <li class="team-member" ng-repeat="member in poker.members">{{member.name}} <input ng-model="member.vote" type="number" ng-if="member.name==poker.mySelf"/>
+                <button ng-click="poker.vote()" ng-if="member.name==poker.mySelf" >Vote</button>
             </li>
         </ul>
     </section>
