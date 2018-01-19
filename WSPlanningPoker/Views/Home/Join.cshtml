@@ -2,11 +2,13 @@
 @{}
 <script src="/js/pokerService.js" type="text/javascript" language="javascript"></script>
 <script src="/js/pokerController.js" type="text/javascript" language="javascript"></script>
+<input type="hidden" id="my-self" value='@ViewBag.MySelf'/>
 <div ng-controller="PokerController as poker">
     <section id="members">
         <h1>Team:</h1>
         <ul>
-            <li ng-repeat="member in poker.members">{{member.name}}</li>
+            <li class="team-member" ng-repeat="member in poker.members">{{member.name}} <input ng-model="member.vote" type="number" ng-if="member.name==poker.mySelf"/>
+            </li>
         </ul>
     </section>
     {{poker | json}}

@@ -19,6 +19,12 @@ namespace WSPlanningPoker.Controllers
         {
             return View();
         }
+        public IActionResult Vote(string name,int vote)
+        {
+            _data.Members.Where(m=>m.Name.Equals(name)).First().Vote=vote;
+
+            return Ok();
+        }
 
         public IActionResult GetData(){
             return Ok(_data);
@@ -28,6 +34,7 @@ namespace WSPlanningPoker.Controllers
         {
             if (!_data.Members.Any(m => m.Name.Equals(name)))
                 _data.Members = _data.Members.Append(new Member { Name = name });
+            ViewData["MySelf"] = name;
             return View();
         }
 
